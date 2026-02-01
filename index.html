@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quer namorar comigo? ❤️</title>
+    <style>
+        /* Reset básico para mobile */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #ffebee;
+            overflow: hidden; /* Impede scroll enquanto o botão foge */
+        }
+
+        h1 {
+            color: #d32f2f;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 50px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            touch-action: manipulation; /* Melhora o toque no mobile */
+        }
+
+        #btn-sim {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        #btn-nao {
+            background-color: #f44336;
+            color: white;
+            position: relative;
+            transition: all 0.1s ease; /* Movimento suave */
+        }
+
+        #video-container {
+            display: none;
+            text-align: center;
+            width: 100%;
+            max-width: 560px;
+            padding: 20px;
+        }
+
+        .mensagem-sucesso {
+            color: #d32f2f;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        iframe {
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            width: 100%;
+            aspect-ratio: 16 / 9;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="conteudo-principal">
+        <h1>Quer namorar comigo? ❤️</h1>
+        <div class="buttons">
+            <button id="btn-sim" onclick="aceitou()">SIM</button>
+            <button id="btn-nao" onmouseover="foge()" onclick="foge()" ontouchstart="foge()">NÃO</button>
+        </div>
+    </div>
+
+    <div id="video-container">
+        <div class="mensagem-sucesso">Obrado por aceitar jujubinha kk! ❤️</div>
+        <iframe id="playerYoutube" 
+            src="" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <script>
+        // SUBSTITUA PELO ID DO SEU VÍDEO (Ex: dQw4w9WgXcQ)
+        const videoID = 'UDjUt6JjgZ8'; 
+
+        function foge() {
+            const btnNao = document.getElementById('btn-nao');
+            
+            // Torna a posição fixa para ele navegar pela tela toda
+            btnNao.style.position = 'fixed';
+
+            // Calcula limites seguros (margem de 50px para não sumir da borda)
+            const larguraTela = window.innerWidth - btnNao.offsetWidth - 50;
+            const alturaTela = window.innerHeight - btnNao.offsetHeight - 50;
+
+            // Gera posição aleatória
+            const x = Math.max(20, Math.random() * larguraTela);
+            const y = Math.max(20, Math.random() * alturaTela);
+
+            btnNao.style.left = x + 'px';
+            btnNao.style.top = y + 'px';
+        }
+
+        function aceitou() {
+            document.getElementById('conteudo-principal').style.display = 'none';
+            const container = document.getElementById('video-container');
+            container.style.display = 'block';
+            
+            const iframe = document.getElementById('playerYoutube');
+            // Autoplay configurado
+            iframe.src = `https://www.youtube.com/embed/${videoID}?autoplay=1`;
+        }
+    </script>
+</body>
+</html>
